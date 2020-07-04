@@ -20,8 +20,18 @@ mysql -e "UPDATE $dbnametest.wcf1_option SET optionValue='$dbnametest_' WHERE op
 cd $www
 rsync -a --delete $domain/ $domaintest
 sed -i "s/$dbname/$dbnametest/g" $pathtest/config.inc.php
-rm $pathtest/options.inc.php
-rm $pathtest/templates/compiled/*.php
-rm $pathtest/cache/*.php
-rm $pathtest/acp/templates/compiled/*.php
-echo $pathtest
+if [ -f $pathtest/options.inc.php ]; then
+	rm $pathtest/options.inc.php
+fi
+count=`ls -1 $pathtest/templates/compiled/*.php 2>/dev/null | wc -l`
+if [ $count != 0 ]; then
+	rm $pathtest/templates/compiled/*.php
+fi
+count=`ls -1 $pathtest/cache/*.php 2>/dev/null | wc -l`
+if [ $count != 0 ]; then
+	rm	 $pathtest/cache/*.php
+fi
+count=`ls -1 $pathtest/acp/templates/compiled/*.php  2>/dev/null | wc -l`
+if [ $count != 0 ]; then
+	rm $pathtest/acp/templates/compiled/*.php
+fi
