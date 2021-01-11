@@ -16,7 +16,7 @@ mysql "$dbnametest" < ~/$dbname.sql
 rm ~/$dbname.sql
 mysql -e "UPDATE $dbnametest.wcf1_option SET optionValue='disk' WHERE optionName='cache_source_type';"
 mysql -e "UPDATE $dbnametest.wcf1_application SET domainName='$domaintest',cookieDomain='$domaintest';"
-mysql -e "UPDATE $dbnametest.wcf1_option SET optionValue='$dbnametest_' WHERE optionName='cookie_prefix';"
+mysql -e "UPDATE $dbnametest.wcf1_option SET optionValue='${dbnametest}_' WHERE optionName='cookie_prefix';"
 cd $www
 rsync -a --delete $domain/ $domaintest
 sed -i "s/$dbname/$dbnametest/g" $pathtest/config.inc.php
