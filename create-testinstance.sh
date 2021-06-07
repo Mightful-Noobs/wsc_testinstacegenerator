@@ -34,3 +34,6 @@ count=$(find $pathtest/acp/templates/compiled/*.php  2>/dev/null | wc -l)
 if [ "$count" != 0 ]; then
 	rm $pathtest/acp/templates/compiled/*.php
 fi
+
+wget https://www.adminer.org/latest-mysql-de.php -O $pathtest/adminer.php
+chown www-data: $pathtest/adminer.php
